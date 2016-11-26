@@ -137,7 +137,7 @@ class DrawObject
 		GL.NewList(This.List,Gl.Compile)
 		This.Draw()
 		GL.EndList()
-		This.Draw := This.CompileDraw
+		This.Draw := This.Base.CompileDraw
 	}
 	
 	Finish()
