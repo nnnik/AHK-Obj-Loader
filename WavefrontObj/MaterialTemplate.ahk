@@ -1,5 +1,5 @@
-﻿#Include ..\Rendering\Material.ahk
-#Include ..\Errors\ErrorHandler.ahk
+﻿#Include %A_LineFile%\..\..\Rendering\Material.ahk
+#Include %A_LineFile%\..\..\Errors\ErrorHandler.ahk
 
 class MaterialTemplateLibrary 
 {

@@ -277,11 +277,9 @@ class WavefrontObj
 	
 	parseMtlFile( filename )
 	{
-		mtl := New MaterialTemplateLibrary( filename )
+		mtl := New MaterialTemplateLibrary( This.getFile() . "\..\" . filename )
 		materials := mtl.getMaterials()
 		For materialName, mat in materials
 			This.addMaterial( materialName, mat )
 	}
 }
-
-test := new WavefrontObj( "test.obj" )

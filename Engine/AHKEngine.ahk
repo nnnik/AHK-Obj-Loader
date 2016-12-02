@@ -3,6 +3,17 @@
 	static CLEAR_BIT   := GL.COLOR_BUFFER_BIT
 	static camModes    := {FPS:{Mode:"Frustrum",ClipFar:5000},CAD:{Mode:"Ortho",BoxSize:10}}
 	
+	setCullMode( mode ) ;0-3
+	{
+		if !mode
+			GL.disable( GL.Cull_Face )
+		else
+		{
+			GL.enable( GL.Cull_Face )
+			GL.CullFace([GL.BACK,GL.FRONT,GL.FRONTANDBACK][mode])
+		}
+	}
+	
 	setLightMode( enable = 1 )
 	{
 		if ( enable )
@@ -12,7 +23,7 @@
 		}
 	}
 	
-	SetZFunc(zFunc="",clear="")
+	setZFunc(zFunc="",clear="")
 	{
 		GL.Enable(GL.DEPTH_TEST)
 		This.CLEAR_BIT := This.CLEAR_BIT|GL.DEPTH_BUFFER_BIT
@@ -22,37 +33,37 @@
 			GL.ClearDepth(clear)
 	}
 	
-	SetCam(mode="FPS")
+	setCam(mode="FPS")
 	{
 		Cam.Init(This.camModes[mode])
 	}
 	
-	SetInputFunc(Fn)
+	setInputFunc(Fn)
 	{
 		If (IsFunc(Fn)&&(IsObject(Fn)||IsObject(Fn := Func(Fn))))
 			This.UpdateInput := Fn
 	}
 	
-	StartUp()
+	startUp()
 	{
 		GUI.Show()
 		GUI.OnExit := Engine.Shutdown.Bind(Engine)
 		This.Start()
 	}
 	
-	Start()
+	start()
 	{
 		This.Running := 1
 		SetTimer,Redraw,% (1000/This.fps)
 	}
 	
-	Stop()
+	stop()
 	{
 		This.Running := 0
 		SetTimer,Redraw, Off
 	}
 	
-	Toggle()
+	toggle()
 	{
 		If This.Running 
 			This.Stop()
@@ -60,13 +71,13 @@
 			This.Start()
 	}
 	
-	Shutdown()
+	shutdown()
 	{
 		This.Stop()
 		ExitApp,0
 	}
 	
-	SetFps(fps)
+	setFps(fps)
 	{
 		This.fps := fps
 		if (This.Start)
@@ -74,7 +85,7 @@
 	}
 	
 	
-	DrawFrame()
+	drawFrame()
 	{
 		This.UpdateInput.Call()
 		GL.Clear(Engine.CLEAR_BIT)

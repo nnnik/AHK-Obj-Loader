@@ -1,18 +1,18 @@
-﻿#Include GL.ahk
-#Include GLCamera.ahk
-#Include GLGUI.ahk
-#Include 3DMatrix.ahk
-#Include GLDrawData.ahk
-#Include AHKEngine.ahk
-#Include ..\WavefrontObj\WavefrontObj.ahk
+﻿#Include %A_LineFile%\..\GL.ahk
+#Include %A_LineFile%\..\GLCamera.ahk
+#Include %A_LineFile%\..\GLGUI.ahk
+#Include %A_LineFile%\..\3DMatrix.ahk
+#Include %A_LineFile%\..\GLDrawData.ahk
+#Include %A_LineFile%\..\AHKEngine.ahk
+#Include %A_LineFile%\..\..\WavefrontObj\WavefrontObj.ahk
 
 #Persistent
 SetBatchLines,-1
 SetMouseDelay,-1
 
 objfiles := ""
-Loop,%A_ScriptDir%/*.obj
-	objfiles .=  A_LoopFileName . "|"
+Loop,%A_LineFile%\..\*.obj
+	objfiles .=  SubStr( A_LoopFileName ,1 ,-4 ) . "|"
 Gui,Select:Add,DropDownList,vobjFile gstartup,%objfiles%
 Gui,Select:Show
 return
@@ -20,7 +20,7 @@ return
 startup:
 Gui,Select:Submit
 Gui,Select:Destroy
-objCar  := new WavefrontObj( objFile )
+objCar  := new WavefrontObj( A_LineFile . "\..\" . objFile ".obj" )
 Car := new DrawObject()
 meshes := objCar.getMeshes()
 For each,mesh in meshes
@@ -31,6 +31,7 @@ Car.compile()
 
 World.add( 0,0,-5, Car )
 
+Engine.setCullMode( 1 )
 Engine.setLightMode( 1 )
 Engine.SetZFunc("LEqual",1.0)
 Engine.SetCam()

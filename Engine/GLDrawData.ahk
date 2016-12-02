@@ -95,30 +95,28 @@ class DrawObject
 	
 	Normal(vec)
 	{
-		this.DrawData.Push([GL.Normal3d,This.Transform( vec )])
+		This.DrawData.Push([GL.Normal3d,This.Transform( vec )])
 	}
 	
 	Translate(x,y,z)
 	{
-		this.Matrix.Translate(x,y,z)
+		This.enableMatrixMode()
+		This.Matrix.Translate(x,y,z)
 	}
 	
 	Rotate(angle,x,y,z)
 	{
-		this.Matrix.Rotate(angle,x,y,z)
+		This.enableMatrixMode()
+		This.Matrix.Rotate(angle,x,y,z)
 	}
 	
 	Scale(x,y,z)
 	{
-		this.Matrix.Scale(x,y,z)
+		This.enableMatrixMode()
+		This.Matrix.Scale(x,y,z)
 	}
 	
-	Color(RGB)
-	{
-		This.DrawData.Push([GL.Color3ub,[RGB>>16,(RGB>>8)&0xFF,RGB&0xFF]])
-	}
-	
-	ColorRGBf( R, G, B )
+	ColorRGB( R, G, B )
 	{
 		This.DrawData.Push([GL.Color3f,[R,G,B]])
 	}

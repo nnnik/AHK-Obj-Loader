@@ -15,7 +15,7 @@
 	static LIGHTING  := 0xB50, LIGHT := {0:0x4000,1:0x4001}, AMBIENT := 0x1200, DIFFUSE := 0x1201, SPECULAR := 0x1202, POSITION := 0x1203
 	static SHININESS := 0x1601
 	static COLORMATERIAL := 0xB57
-	static FRONT := 0x404, FRONTANDBACK := 0x408
+	static FRONT := 0x404, BACK := 0x405, FRONTANDBACK := 0x408
 	
 	enableLogging()
 	{
@@ -238,5 +238,10 @@
 		For Each, val in arr
 			NumPut( val, floatArray, Each*4-4, "float" )
 		return &floatArray
+	}
+	
+	CullFace( mode )
+	{
+		DllCall( "opengl32\glCullFace", "UInt", mode )
 	}
 }

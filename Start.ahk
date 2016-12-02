@@ -1,1 +1,1 @@
-Run,%A_ScriptDir%\Engine\LoadObjFilesTest.ahk
+﻿Run %A_LineFile%\..\Engine\LoadObjFileTest.ahk
